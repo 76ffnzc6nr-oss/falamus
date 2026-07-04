@@ -51,6 +51,7 @@ privileges. The destructive-command blacklist, confirmations and path-allowlist 
 guardrails, not a sandbox — run it in a **trusted directory** on a **trusted task**.
 - The **persistent interactive shell is off by default** (POSIX only). On Windows it is
   unavailable and stays silently off; enabling it there just prints a warning.
+- Exposing an **MCP server** lets the caller read any file you can — expose it only to a **trusted** caller.
 
 ## License
 MIT — see [`LICENSE`](LICENSE).
