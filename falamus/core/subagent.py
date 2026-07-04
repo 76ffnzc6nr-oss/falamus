@@ -61,7 +61,7 @@ def _posix(p: object) -> str:
 
 # Windows-only system-prompt note: tell the model the truth (Windows + Git-Bash) so it keeps emitting unix
 # commands + forward-slash paths instead of cmd verbs / backslashes that break under bash. Injected at
-# runtime (like the headless note) ONLY on Windows → never touches the byte-identical POSIX prompts.
+# runtime ONLY on Windows → never touches the byte-identical POSIX prompts.
 _WIN_ENV_NOTE = frag("notes", "win_env")
 
 

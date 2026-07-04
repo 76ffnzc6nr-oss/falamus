@@ -46,7 +46,7 @@ def _interactive_tty(interactive: bool) -> bool:
 
 def _choose_model(items: list[str], interactive: bool) -> str | None:
     """Pick a model at startup: an interactive numbered menu when there's a real choice (>1, on a tty),
-    otherwise the first. Headless / non-tty never prompts."""
+    otherwise the first. A non-tty never prompts."""
     if not items:
         return None
     if len(items) == 1 or not _interactive_tty(interactive):

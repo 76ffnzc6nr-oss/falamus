@@ -1,7 +1,7 @@
 # falamus — destructive-command blacklist
 
 A command matching ANY rule below is treated as highly destructive: `run_command` / `shell_open` block it
-outright; `shell_input` asks you to confirm (denied in headless mode).
+outright; `shell_input` asks you to confirm.
 
 **Only the lines inside the fenced code block are rules.** One Python regular expression per line.
 `#` starts a comment; `#win:` marks a **Windows-only** rule (applied only when running on Windows).

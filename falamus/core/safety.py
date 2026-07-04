@@ -166,7 +166,7 @@ class SafetyPolicy:
         # in dev mode (placed before the dev-mode shortcut) because it opens an unchecked live terminal.
         if tool.name == "shell_open":
             cmd = str(args.get("command", ""))
-            # the launch command itself still gets the destructive blacklist (so a headless auto-approve
+            # the launch command itself still gets the destructive blacklist (so an auto-approving caller
             # can't open `rm -rf /` through it) — even though the session's LATER input cannot be checked.
             for pat in self.blacklist:
                 if re.search(pat, cmd):
