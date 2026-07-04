@@ -1,0 +1,71 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "falamus"
+description = "A lightweight local-LLM terminal agent (llama.cpp / ollama)."
+readme = "README.md"
+authors = [{ name = "CY" }]
+license = { text = "MIT" }
+requires-python = ">=3.9"
+dynamic = ["version"]
+dependencies = [
+    "httpx>=0.27",
+    "prompt_toolkit>=3.0",
+    # legacy-Windows console ANSI (modern Windows Terminal / conhost don't need it); no-op elsewhere
+    'colorama>=0.4.6; sys_platform == "win32"',
+]
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Code Generators",
+]
+
+# `falamus` console command → falamus/main.py:main()
+[project.scripts]
+falamus = "falamus.main:main"
+
+# dev toolchain: pip install -e ".[dev]"
+[project.optional-dependencies]
+dev = ["pytest", "ruff", "mypy"]
+# cloud backends (Anthropic/…): only needed to talk to a paid API + encrypt the stored key.
+# `pip install falamus` stays pure-local with zero of these.
+cloud = ["cryptography>=42"]
+
+# Single version source: falamus/version.py (__version__).
+[tool.setuptools.dynamic]
+version = { attr = "falamus.version.__version__" }
+
+# The package lives at the repo root as `falamus/` (plus its subpackages).
+[tool.setuptools.packages.find]
+include = ["falamus*"]
+
+# Ship the prompt fragment data files (.md) inside the wheel — the built-in prompt SETS are subfolders.
+[tool.setuptools.package-data]
+"falamus.prompt" = ["*.md", "*/*.md"]
+"falamus.core" = ["*.md"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+markers = ["live: needs a running model server (deselected by default)"]
+addopts = "-m 'not live'"
+
+# Phase 6 lint: pyflakes + pycodestyle + import-sort + bugbear + pyupgrade.
+# E501 (line-too-long) is ignored: many tool/prompt description strings are intentionally long.
+[tool.ruff]
+line-length = 120
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP"]
+ignore = ["E501"]
+
+# mypy: the package is clean at this level (`mypy falamus/`). Third-party stubs aren't installed.
+[tool.mypy]
+ignore_missing_imports = true

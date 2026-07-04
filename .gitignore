@@ -1,0 +1,18 @@
+# virtual environment
+.venv/
+
+# python caches / build
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+
+# user-specific config (regenerated on first run)
+falamus/config.ini
+
+# runtime session data / error logs (written into workdirs)
+.falamus/
+
+# Claude Code local (per-machine) settings — never commit
+.claude/settings.local.json
