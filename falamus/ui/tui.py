@@ -375,12 +375,11 @@ class HelperTUI:
         gap = max(0, act_inner - len(content))            # right-align the label, dash-filling the slack on the LEFT
         suf.append(("class:status", " │ "))
         suf.append((cls, "-" * gap + content))            # color fills the WHOLE field (dashes + label), no white gap
-        # persistent shell sessions — a YELLOW "CLI:n" field, shown ONLY while ≥1 session is open (it lives
-        # one turn, so it appears during a turn that opened one and clears when the turn ends).
-        shells = self.backend.open_shells() if hasattr(self.backend, "open_shells") else 0
-        if shells:
+        # persistent shell — a YELLOW "shell" field, shown ONLY while a session is open (it lives one turn,
+        # so it appears during a turn that opened one and clears when the turn ends). No count shown.
+        if (self.backend.open_shells() if hasattr(self.backend, "open_shells") else 0):
             suf.append(("class:status", " │ "))
-            suf.append(("class:cli", f" CLI:{shells} "))
+            suf.append(("class:cli", " shell "))
         # elapsed — its OWN field, stopwatch style: 4 chars, dash-padded ("----" at 0 / never-run, "--42",
         # "-156", "9999" capped). Counts while busy, frozen at the last turn's duration while idle. The
         # trailing " │" closes the field (so it's bracketed like the others, not left open before the pad).

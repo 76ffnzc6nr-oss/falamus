@@ -293,21 +293,6 @@ class Backend:
             out(f"falamus {__version__}")
         elif cmd == "/tools":
             out(i18n.t("tools_label", tools=", ".join(self.orch.allowed_tools or [])))
-        elif cmd == "/kill":
-            mgr = self.runtime.shell_mgr if self.runtime else None
-            shell_rows = mgr.listing() if mgr else []
-            if not arg:
-                if not shell_rows:
-                    out(i18n.t("kill_none"))
-                else:
-                    out(i18n.t("kill_list"))
-                    for pid, owner, note in shell_rows:
-                        out(f"  {pid}  [{owner}] {note or '-'}")
-                    out(i18n.t("kill_usage"))
-            elif arg.isdigit() and mgr is not None:
-                out(mgr.kill(int(arg)))
-            else:
-                out(i18n.t("kill_usage"))
         elif cmd == "/config":
             if not arg:
                 out(self.cfg.to_text() + "\n\nset with: /config <key> <value>   (keys: "

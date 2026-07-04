@@ -26,9 +26,6 @@ _MESSAGES: dict[str, dict[str, str]] = {
         "bye": "Bye.",
         "unknown_cmd": "Unknown command: {cmd} (try /help)",
         "tools_label": "Main agent tools: {tools}",
-        "kill_none": "No persistent shell sessions are open.",
-        "kill_list": "Open shell sessions (pid  [agent]  note):",
-        "kill_usage": "Use /kill <pid> to force-close one (only sessions falamus started).",
         "compacted": "Context compacted.",
         "no_compact": "Auto-compact is disabled.",
         "new_session": "Started a new session.",
@@ -85,7 +82,6 @@ _MESSAGES: dict[str, dict[str, str]] = {
   /version           show the version
   /b                 jump to the latest output & resume auto-scroll (= Ctrl-G)
   /tools             list main-agent tools
-  /kill [pid]        list open shell sessions / force-close one (--persistent-interactive-shell)
   /config            show current config (config.ini)
   /compact           compact context now
   /reset             start a new session
@@ -116,9 +112,6 @@ Keys:
         "bye": "再見。",
         "unknown_cmd": "未知指令:{cmd}(/help 看清單)",
         "tools_label": "主代理工具:{tools}",
-        "kill_none": "目前沒有開啟中的持久終端。",
-        "kill_list": "開啟中的終端 (pid  [代理]  備註):",
-        "kill_usage": "用 /kill <pid> 強制關閉(只能關 falamus 啟動的)。",
         "compacted": "已壓縮上下文。",
         "no_compact": "未啟用自動壓縮。",
         "new_session": "已開新 session。",
@@ -174,7 +167,6 @@ Keys:
   /version           顯示版本
   /b                 跳到最新輸出並恢復自動捲動(= Ctrl-G)
   /tools             列出主代理可用工具
-  /kill [pid]        列出開啟中的終端 / 強制關閉指定 pid(--persistent-interactive-shell)
   /config            顯示目前設定(config.ini)
   /compact           手動壓縮上下文
   /reset             開一個新 session
