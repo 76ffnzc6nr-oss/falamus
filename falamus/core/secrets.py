@@ -53,6 +53,12 @@ def _aesgcm():
     return AESGCM
 
 
+def require_crypto() -> None:
+    """Raise SecretsUnavailable (with the install hint) if the [cloud] extra isn't installed. Call this
+    EARLY — the moment a cloud backend is picked — so failure lands before the user enters an API key."""
+    _aesgcm()
+
+
 def _chmod600(path) -> None:
     """Restrict to the owner. POSIX: 0600. Windows: best-effort (chmod is limited); not fatal."""
     try:

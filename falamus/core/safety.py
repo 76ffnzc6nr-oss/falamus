@@ -241,8 +241,8 @@ def make_guard(
 if __name__ == "__main__":
     from falamus.tools import default_registry
 
-    reg = default_registry("/home/c/helper")
-    pol = SafetyPolicy(workdir="/home/c/helper", confirm_command=True, confirm_write=True)
+    reg = default_registry(".")
+    pol = SafetyPolicy(workdir=".", confirm_command=True, confirm_write=True)
 
     def fake_confirm(tool, args, reason):
         print(f"  ❓ confirm: {reason} → (auto-reject)")

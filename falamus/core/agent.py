@@ -359,7 +359,7 @@ if __name__ == "__main__":
 
     cli = LLMClient("http://localhost:8080")
     cli.detect()
-    reg = default_registry("/home/c/helper")
+    reg = default_registry(".")
 
     def log(kind: str, data: Any) -> None:
         if kind == "tool_call":

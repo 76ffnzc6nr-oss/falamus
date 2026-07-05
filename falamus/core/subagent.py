@@ -700,16 +700,16 @@ if __name__ == "__main__":
         elif kind == "final":
             print(f"  [{name}] * {str(data)[:120]}")
 
-    rt = AgentRuntime.start(client, workdir="/home/c/helper", on_event=log)
+    rt = AgentRuntime.start(client, workdir=".", on_event=log)
     print("session:", rt.session.root)
 
     mode = sys.argv[1] if len(sys.argv) > 1 else "direct"
     if mode == "direct":
         print("\n=== [A] directly test the runtime.spawn() contract ===")
         res = rt.spawn(
-            task="Count how many .py files are under /home/c/helper (excluding the .venv dir), list their "
+            task="Count how many .py files are under . (excluding the .venv dir), list their "
                  "names, and write the result into result.txt and deliver it. Hint: you can use "
-                 "find /home/c/helper -path '*/.venv' -prune -o -name '*.py' -print",
+                 "find . -path '*/.venv' -prune -o -name '*.py' -print",
         )
         print("\nspawn returned:")
         print("  agent_id :", res["agent_id"])

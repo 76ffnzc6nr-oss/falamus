@@ -215,7 +215,13 @@ def _setup_provider(cfg: Config) -> None:
         cfg.save()
         print(f"falamus: local backend '{cfg.backend}' at {url} saved. Run: falamus", file=sys.stderr)
         return
-    # cloud
+    # cloud — verify the [cloud] extra is present NOW, before asking for a provider/key (otherwise the
+    # user would type the whole API key only to hit the "install [cloud]" error at save time).
+    try:
+        secrets.require_crypto()
+    except secrets.SecretsUnavailable as e:
+        print(f"falamus: {e}", file=sys.stderr)
+        sys.exit(1)
     provs = [p for p in (providers.get(pid) for pid in providers.ids()) if p is not None]
     idx = _menu("Choose a cloud provider:", [p.display for p in provs] + ["(more coming soon)"])
     if idx >= len(provs):
